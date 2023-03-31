@@ -1,0 +1,72 @@
+[versions]
+activity-compose = "1.7.0"
+agp = "7.4.2"
+androidx-activity = "1.7.0"
+appcompat = "1.6.1"
+coil = "2.2.2"
+compose = "1.4.0"
+compose-bom = "2023.03.00"
+compose-compiler = "1.4.4"
+compose-material3 = "1.0.1"
+compose-paging = "1.0.0-alpha18"
+core-ktx = "1.9.0"
+coroutines = "1.6.4"
+detekt = "1.22.0"
+espresso = "3.5.1"
+junit = "1.1.5"
+junit-junit = "4.13.2"
+kotlin = "1.8.10"
+ksp = "1.8.10-1.0.9"
+ktlint = "11.0.0"
+lifecycle = "2.6.1"
+markwon = "4.6.2"
+test = "1.5.2"
+
+[libraries]
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+androidx-test-core = { module = "androidx.test:core", version.ref = "test" }
+androidx-test-ktx = { module = "androidx.test:core-ktx", version.ref = "test" }
+androidx-test-rules = { module = "androidx.test:rules", version.ref = "test" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "test" }
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-material-core = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "compose" }
+compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+compose-material3-core = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
+compose-material3-window-size = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "compose-material3" }
+compose-paging = { module = "androidx.paging:paging-compose", version.ref = "compose-paging" }
+compose-ui-core = { module = "androidx.compose.ui:ui" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-ui-test-core = { module = "androidx.compose.ui:ui-test" }
+compose-ui-test-junit = { module = "androidx.compose.ui:ui-test-junit4" }
+compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+compose-ui-util = { module = "androidx.compose.ui:ui-util" }
+detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+junit = { module = "junit:junit", version.ref = "junit-junit" }
+junit-core = { module = "androidx.test.ext:junit", version.ref = "junit" }
+junit-ktx = { module = "androidx.test.ext:junit-ktx", version.ref = "junit" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+ktlint-gradle = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
+markwon-core = { module = "io.noties.markwon:core", version.ref = "markwon" }
+markwon-editor = { module = "io.noties.markwon:editor", version.ref = "markwon" }
+markwon-html = { module = "io.noties.markwon:html", version.ref = "markwon" }
+markwon-image-coil = { module = "io.noties.markwon:image-coil", version.ref = "markwon" }
+markwon-strikethrough = { module = "io.noties.markwon:ext-strikethrough", version.ref = "markwon" }
+markwon-tables = { module = "io.noties.markwon:ext-tables", version.ref = "markwon" }
+
+[bundles]
+compose = ["compose-foundation", "compose-material-core", "compose-material-icons-core", "compose-material-icons-extended", "compose-ui-core", "compose-ui-tooling", "compose-ui-util", "compose-material3-core", "compose-material3-window-size"]
+markwon = ["markwon-core", "markwon-editor", "markwon-html", "markwon-image-coil", "markwon-strikethrough", "markwon-tables"]
+testcompose = ["compose-ui-test-core", "compose-ui-test-junit"]

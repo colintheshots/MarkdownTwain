@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="markdown_editor_bold">Bold</string>
+    <string name="markdown_editor_italic">Italic</string>
+</resources>

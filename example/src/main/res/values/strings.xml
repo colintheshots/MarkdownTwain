@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Markdown Twain</string>
+    <string name="markdown_entry_hint">Enter Markdown text here</string>
+    <string name="preview_markdown_heading">Preview</string>
+</resources>
