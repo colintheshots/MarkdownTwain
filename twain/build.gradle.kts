@@ -97,7 +97,7 @@ publishing {
         }
     }
     publications {
-        create<MavenPublication>("twain") {
+        register<MavenPublication>("twain") {
             pom {
                 name.set(project.properties["POM_NAME"].toString())
                 description.set(project.properties["POM_DESCRIPTION"].toString())
@@ -127,6 +127,9 @@ publishing {
                     developerConnection.set(project.properties["POM_SCM_DEV_CONNECTION"].toString())
                     url.set(project.properties["POM_SCM_URL"].toString())
                 }
+            }
+            afterEvaluate {
+                from(components["release"])
             }
         }
     }
