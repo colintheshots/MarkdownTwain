@@ -70,3 +70,9 @@ markwon-tables = { module = "io.noties.markwon:ext-tables", version.ref = "markw
 compose = ["compose-foundation", "compose-material-core", "compose-material-icons-core", "compose-material-icons-extended", "compose-ui-core", "compose-ui-tooling", "compose-ui-util", "compose-material3-core", "compose-material3-window-size"]
 markwon = ["markwon-core", "markwon-editor", "markwon-html", "markwon-image-coil", "markwon-strikethrough", "markwon-tables"]
 testcompose = ["compose-ui-test-core", "compose-ui-test-junit"]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

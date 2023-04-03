@@ -82,8 +82,8 @@ fun MarkdownEditor(
     onValueChange: (TextFieldValue) -> Unit,
     counterValue: Int,
     charLimit: Int?,
-    maxLines: Int? = null,
     modifier: Modifier = Modifier,
+    maxLines: Int? = null,
     inputType: Int = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE,
     @StringRes hint: Int? = null,
     setView: (EditText) -> Unit = {},
@@ -245,7 +245,7 @@ private fun createEditor(
             )
         )
         setText(value.text)
-        addTextChangedListener(@Suppress("EmptyFunctionBlock") object : TextWatcher {
+        addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -301,7 +301,6 @@ private fun createEditor(
                 }
             }
 
-            @Suppress("EmptyFunctionBlock")
             override fun onDestroyActionMode(mode: ActionMode?) {}
         }
     }
@@ -343,7 +342,6 @@ internal object MarkdownActionMenuItems {
     )
 }
 
-@Suppress("MagicNumber")
 internal fun createMarkdownRender(context: Context): Markwon {
     val imageLoader = ImageLoader.Builder(context)
         .apply {

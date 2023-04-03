@@ -1,0 +1,33 @@
+formatting:
+  MultiLineIfElse:
+    active: false
+    autoCorrect: false
+
+complexity:
+  LongParameterList:
+    functionThreshold: 12
+    ignoreAnnotated: [ 'Composable' ]
+    ignoreDefaultParameters: true
+  TooManyFunctions:
+    thresholdInFiles: 15
+    ignorePrivate: true
+
+style:
+  ThrowsCount:
+    max: 4
+  MagicNumber:
+    ignorePropertyDeclaration: true
+    ignoreCompanionObjectPropertyDeclaration: true
+  UnusedPrivateMember:
+    ignoreAnnotated: [ 'Preview' ]
+
+empty-blocks:
+  EmptyFunctionBlock:
+    ignoreOverridden: true
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated: [ 'Composable' ]
+  TopLevelPropertyNaming:
+    constantPattern: '[A-Z][A-Za-z0-9]*'
+
