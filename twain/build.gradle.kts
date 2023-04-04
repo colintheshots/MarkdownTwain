@@ -44,7 +44,9 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
     publishing {
-        singleVariant("release")
+        singleVariant("release") {
+            withSourcesJar()
+        }
     }
 }
 

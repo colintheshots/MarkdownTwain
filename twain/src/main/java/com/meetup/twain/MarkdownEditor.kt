@@ -1,6 +1,5 @@
-import MarkdownActionMenuItems.bold
-import MarkdownActionMenuItems.italic
-import MarkdownActionMenuItems.wrapSelectionWithMarkdownChars
+package com.meetup.twain
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PorterDuff
@@ -42,6 +41,9 @@ import coil.ImageLoader
 import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import com.meetup.twain.LinksPlusArrowKeysMovementMethod
+import com.meetup.twain.MarkdownActionMenuItems.bold
+import com.meetup.twain.MarkdownActionMenuItems.italic
+import com.meetup.twain.MarkdownActionMenuItems.wrapSelectionWithMarkdownChars
 import com.meetup.twain.R
 import com.meetup.twain.handler.BlockQuoteEditHandler
 import com.meetup.twain.handler.CodeEditHandler
@@ -67,10 +69,10 @@ import java.util.concurrent.Executors
  *
  * @param value TextFieldValue including text, selection, and cursor position
  * @param onValueChange callback to set a TextFieldValue in Compose
- * @param maxLines maximum number of lines to display
  * @param counterValue number of characters in the editor
  * @param charLimit maximum number of character to allow
  * @param modifier modifiers for Jetpack Compose view
+ * @param maxLines maximum number of lines to display
  * @param inputType InputType to use for the EditText
  * @param hint string resource for the hint to show
  * @param setView callback to provide a reference to the underlying View
