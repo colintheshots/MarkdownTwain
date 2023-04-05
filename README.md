@@ -14,7 +14,7 @@ With MarkdownTwain, developers can easily add a Markdown editor and viewer to th
 
 ## Demo
 
-https://github.com/meetup/MarkdownTwain/tree/main/doc/Screen_recording_20230405_141145.mp4
+https://user-images.githubusercontent.com/626405/230183141-e41033f1-26ba-44bf-adcb-fac65ba649a3.mp4
 
 ## Usage
 
