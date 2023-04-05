@@ -9,19 +9,18 @@ With MarkdownTwain, developers can easily add a Markdown editor and viewer to th
 - Syntax highlighting for Markdown text
 - Preview of formatted text in real-time
 - Easy-to-use editor and viewer components
-- Fully customizable styling options
-- Support for both light and dark themes
+- Customizable styling options
 - Based on the popular Markwon library for Android Views
 
 ## Demo
 
-
+https://github.com/meetup/MarkdownTwain/tree/main/doc/Screen_recording_20230405_141145.mp4
 
 ## Usage
 
 To use MarkdownTwain in your Android project, follow these steps:
 
-1. Add the following dependency to your app's `build.gradle` file:
+1. Add the following dependency to your app's `build.gradle.kts` or `build.gradle` file:
 
 <details open>
 <summary>Kotlin</summary>

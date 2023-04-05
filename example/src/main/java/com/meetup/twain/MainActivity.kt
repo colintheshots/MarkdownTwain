@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                                     textFieldValue.value = value.copy(text = value.text)
                                 },
                                 charLimit = CHAR_LIMIT,
-                                maxLines = 10,
+                                maxLines = 8,
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(16.dp),
