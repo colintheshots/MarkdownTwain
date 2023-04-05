@@ -51,13 +51,7 @@ dependencies {
     val textFieldValue = rememberSaveable(stateSaver = TextFieldValue.Saver) {
         mutableStateOf("")
     }
-    val charLimit = 2000
-    Card(
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = Color.White,
-        border = BorderStroke(1.dp, Color.Black),
-        elevation = 0.dp
-    ) {
+    Card {
         MarkdownEditor(
             value = textFieldValue.value,
             onValueChange = { value -> textFieldValue.value = value.copy(text = value.text) },

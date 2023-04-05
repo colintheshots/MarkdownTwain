@@ -39,12 +39,7 @@ class MainActivity : ComponentActivity() {
 
             MarkdownTwainTheme {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    Card(
-                        shape = RoundedCornerShape(16.dp),
-                        backgroundColor = Color.White,
-                        border = BorderStroke(1.dp, Color.Black),
-                        elevation = 0.dp
-                    ) {
+                    Card(border = BorderStroke(1.dp, Color.Black)) {
                         Box {
                             MarkdownEditor(
                                 value = textFieldValue.value,
