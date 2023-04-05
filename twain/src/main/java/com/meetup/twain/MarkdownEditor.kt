@@ -40,11 +40,9 @@ import androidx.core.graphics.drawable.DrawableCompat
 import coil.ImageLoader
 import coil.disk.DiskCache
 import coil.memory.MemoryCache
-import com.meetup.twain.LinksPlusArrowKeysMovementMethod
 import com.meetup.twain.MarkdownActionMenuItems.bold
 import com.meetup.twain.MarkdownActionMenuItems.italic
 import com.meetup.twain.MarkdownActionMenuItems.wrapSelectionWithMarkdownChars
-import com.meetup.twain.R
 import com.meetup.twain.handler.BlockQuoteEditHandler
 import com.meetup.twain.handler.CodeEditHandler
 import com.meetup.twain.handler.HeadingEditHandler
@@ -69,9 +67,8 @@ import java.util.concurrent.Executors
  *
  * @param value TextFieldValue including text, selection, and cursor position
  * @param onValueChange callback to set a TextFieldValue in Compose
- * @param counterValue number of characters in the editor
- * @param charLimit maximum number of character to allow
  * @param modifier modifiers for Jetpack Compose view
+ * @param charLimit maximum number of character to allow
  * @param maxLines maximum number of lines to display
  * @param inputType InputType to use for the EditText
  * @param hint string resource for the hint to show
@@ -82,9 +79,8 @@ import java.util.concurrent.Executors
 fun MarkdownEditor(
     value: TextFieldValue,
     onValueChange: (TextFieldValue) -> Unit,
-    counterValue: Int,
-    charLimit: Int?,
     modifier: Modifier = Modifier,
+    charLimit: Int? = null,
     maxLines: Int? = null,
     inputType: Int = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE,
     @StringRes hint: Int? = null,
@@ -94,7 +90,7 @@ fun MarkdownEditor(
     val context = LocalContext.current
     @Suppress("DEPRECATION") val vibrator =
         context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-    val (lastCounter, setLastCounter) = rememberSaveable { mutableStateOf(counterValue) }
+    val (lastCounter, setLastCounter) = rememberSaveable { mutableStateOf(value.text.length) }
 
     AndroidView(modifier = modifier, factory = { ctx ->
         createEditor(
@@ -114,7 +110,13 @@ fun MarkdownEditor(
             editText.setText(value.text)
             editText.setSelection(value.selection.start, value.selection.end)
         }
-        updateCounterRemaining(counterValue, lastCounter, vibrator, editText, setLastCounter)
+        updateCounterRemaining(
+            value.text.length,
+            lastCounter,
+            vibrator,
+            editText,
+            setLastCounter
+        )
     })
 }
 
