@@ -145,7 +145,8 @@ dependencies {
     implementation(libs.bundles.markwon)
     implementation(libs.bundles.compose)
     implementation(libs.androidx.appcompat)
-    implementation(libs.coil)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.gif)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.junit.core)

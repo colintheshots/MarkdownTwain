@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.VibrationEffect.createOneShot
 import android.os.VibrationEffect.createWaveform
 import android.os.Vibrator
@@ -20,6 +21,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.accessibility.AccessibilityEvent
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputConnection
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.DrawableRes
@@ -37,9 +40,19 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.util.component1
+import androidx.core.util.component2
+import androidx.core.view.ContentInfoCompat
+import androidx.core.view.OnReceiveContentListener
+import androidx.core.view.ViewCompat
+import androidx.core.view.inputmethod.EditorInfoCompat
+import androidx.core.view.inputmethod.InputConnectionCompat
 import coil.ImageLoader
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
 import coil.disk.DiskCache
 import coil.memory.MemoryCache
+import coil.util.DebugLogger
 import com.meetup.twain.MarkdownActionMenuItems.bold
 import com.meetup.twain.MarkdownActionMenuItems.italic
 import com.meetup.twain.MarkdownActionMenuItems.wrapSelectionWithMarkdownChars
@@ -131,14 +144,14 @@ private fun updateCounterRemaining(
     if (counterValue != lastCounter) {
         when {
             counterValue in 1..10 -> {
-                if (lastCounter > 10 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (lastCounter > 10 && SDK_INT >= Build.VERSION_CODES.O) {
                     vibrator.vibrate(createOneShot(150, 96))
                 }
                 editText.makeCursorColor(Color.Red.toArgb())
             }
 
             counterValue in -9..0 -> {
-                if (lastCounter > 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (lastCounter > 0 && SDK_INT >= Build.VERSION_CODES.O) {
                     vibrator.vibrate(
                         createWaveform(
                             arrayOf(150L, 200L).toLongArray(),
@@ -151,7 +164,7 @@ private fun updateCounterRemaining(
             }
 
             counterValue <= -10 -> {
-                if (lastCounter > -10 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (lastCounter > -10 && SDK_INT >= Build.VERSION_CODES.O) {
                     vibrator.vibrate(
                         createWaveform(
                             arrayOf(150L, 200L).toLongArray(),
@@ -174,7 +187,7 @@ private fun updateCounterRemaining(
     "PrivateApi"
 ) // we need reflection to change the cursor color pre-API 29
 private fun EditText.makeCursorColor(argb: Int) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+    if (SDK_INT >= Build.VERSION_CODES.Q) {
         val wrapped = DrawableCompat.wrap(textCursorDrawable!!).mutate()
         DrawableCompat.setTint(wrapped, argb)
         wrapped.setBounds(0, 0, wrapped.intrinsicWidth, wrapped.intrinsicHeight)
@@ -208,6 +221,34 @@ private fun EditText.makeCursorColor(argb: Int) {
 
 private const val IMAGE_MEMORY_PERCENTAGE = 0.5
 
+private fun imageKeyboardEditText(context: Context): EditText = object : EditText(context) {
+    override fun onCreateInputConnection(editorInfo: EditorInfo): InputConnection {
+        val ic: InputConnection? = super.onCreateInputConnection(editorInfo)
+        val allowedMimeTypes = arrayOf("image/gif", "image/jpeg", "image/png")
+        EditorInfoCompat.setContentMimeTypes(editorInfo, allowedMimeTypes)
+
+        ViewCompat.setOnReceiveContentListener(
+            this,
+            allowedMimeTypes,
+            object : OnReceiveContentListener {
+                override fun onReceiveContent(
+                    view: View,
+                    payload: ContentInfoCompat
+                ): ContentInfoCompat? {
+                    val (content, remaining) = payload.partition { item -> item.uri != null }
+                    if (content == null) return remaining
+
+                    val uri = content.linkUri
+                    val description = content.clip.description
+                    val newText = "![${description.label}]($uri)"
+                    ic?.commitText(newText, (view as EditText).selectionEnd + newText.length)
+                    return remaining
+                }
+            })
+        return InputConnectionCompat.createWrapper(this, ic!!, editorInfo)
+    }
+}
+
 @Suppress("LongParameterList")
 private fun createEditor(
     context: Context,
@@ -235,7 +276,7 @@ private fun createEditor(
             })
         )
         .build()
-    return EditText(context).apply {
+    return imageKeyboardEditText(context).apply {
         movementMethod = LinksPlusArrowKeysMovementMethod.instance
         setBackgroundResource(android.R.color.transparent) // removes EditText underbar
         hint?.let { setHint(it) }
@@ -352,8 +393,19 @@ internal fun createMarkdownRender(context: Context): Markwon {
             memoryCache {
                 MemoryCache.Builder(context).maxSizePercent(IMAGE_MEMORY_PERCENTAGE).build()
             }
-            diskCache { DiskCache.Builder().maxSizePercent(IMAGE_MEMORY_PERCENTAGE).build() }
+            diskCache {
+                DiskCache.Builder().directory(context.cacheDir.resolve("image_cache"))
+                    .maxSizePercent(IMAGE_MEMORY_PERCENTAGE).build()
+            }
             crossfade(true)
+            components {
+                if (SDK_INT >= 28) {
+                    add(ImageDecoderDecoder.Factory(enforceMinimumFrameDelay = true))
+                } else {
+                    add(GifDecoder.Factory(enforceMinimumFrameDelay = true))
+                }
+            }
+            logger(DebugLogger())
         }.build()
 
     return Markwon.builder(context)
