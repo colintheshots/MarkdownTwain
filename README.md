@@ -27,7 +27,7 @@ To use MarkdownTwain in your Android project, follow these steps:
 
 ```kotlin
 dependencies {
-    implementation("com.meetup:twain:0.2.1")
+    implementation("com.meetup:twain:0.2.2")
 }
 ```
 </details>
@@ -36,7 +36,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'com.meetup:twain:0.2.1'
+    implementation 'com.meetup:twain:0.2.2'
 }
 ```
 
