@@ -1,4 +1,7 @@
+import java.io.FileInputStream
+import java.io.InputStreamReader
 import java.net.URI
+import java.util.Properties
 
 @Suppress(
     "DSL_SCOPE_VIOLATION"
@@ -71,16 +74,28 @@ fun getSnapshotRepositoryUrl(): URI {
     return URI(url)
 }
 
-fun getRepositoryUsername(): String {
-    return if (project.hasProperty("NEXUS_USERNAME")) project.properties["NEXUS_USERNAME"].toString()
-    else error("Needs username for repository")
+fun Project.getLocalProperty(key: String, file: String = "local.properties"): Any {
+    val properties = Properties()
+    val localProperties = File(file)
+    if (localProperties.isFile) {
+        InputStreamReader(FileInputStream(localProperties), Charsets.UTF_8).use { reader ->
+            properties.load(reader)
+        }
+    } else ""
+
+    return properties.getProperty(key) ?: ""
 }
 
-fun getRepositoryPassword(): String {
-    return if (project.hasProperty("NEXUS_PASSWORD")) project.properties["NEXUS_PASSWORD"].toString()
-    else error("Needs password for repository")
+fun Project.getRepositoryUsername(): String {
+    return this.getLocalProperty("nexus_username").toString() ?: ""
 }
 
+fun Project.getRepositoryPassword(): String {
+    return this.getLocalProperty("nexus_password").toString() ?: ""
+}
+
+val repoUserName = project.getLocalProperty("nexus_username").toString()
+val repoPassword = project.getLocalProperty("nexus_password").toString()
 publishing {
     repositories {
         maven {
@@ -93,8 +108,8 @@ publishing {
             url = (if (isReleaseBuild()) releasesRepoUrl else snapshotsRepoUrl)
 
             credentials {
-                username = getRepositoryUsername()
-                password = getRepositoryPassword()
+                username = repoUserName
+                password = repoPassword
             }
         }
     }
