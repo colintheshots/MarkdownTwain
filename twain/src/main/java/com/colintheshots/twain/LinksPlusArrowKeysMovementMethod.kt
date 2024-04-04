@@ -1,4 +1,4 @@
-package com.meetup.twain
+package com.colintheshots.twain
 
 import android.text.Layout
 import android.text.Selection
@@ -7,7 +7,7 @@ import android.text.method.ArrowKeyMovementMethod
 import android.text.method.MovementMethod
 import android.view.MotionEvent
 import android.widget.TextView
-import com.meetup.twain.handler.LinkEditHandler
+import com.colintheshots.twain.handler.LinkEditHandler
 
 class LinksPlusArrowKeysMovementMethod : ArrowKeyMovementMethod() {
     override fun onTouchEvent(widget: TextView, buffer: Spannable, event: MotionEvent): Boolean {

@@ -1,4 +1,4 @@
-package com.meetup.twain
+package com.colintheshots.twain
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -53,15 +53,15 @@ import coil.decode.ImageDecoderDecoder
 import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import coil.util.DebugLogger
-import com.meetup.twain.MarkdownActionMenuItems.bold
-import com.meetup.twain.MarkdownActionMenuItems.italic
-import com.meetup.twain.MarkdownActionMenuItems.wrapSelectionWithMarkdownChars
-import com.meetup.twain.handler.BlockQuoteEditHandler
-import com.meetup.twain.handler.CodeEditHandler
-import com.meetup.twain.handler.HeadingEditHandler
-import com.meetup.twain.handler.LinkEditHandler
-import com.meetup.twain.handler.LinkEditHandler.OnClick
-import com.meetup.twain.handler.StrikethroughEditHandler
+import com.colintheshots.twain.MarkdownActionMenuItems.bold
+import com.colintheshots.twain.MarkdownActionMenuItems.italic
+import com.colintheshots.twain.MarkdownActionMenuItems.wrapSelectionWithMarkdownChars
+import com.colintheshots.twain.handler.BlockQuoteEditHandler
+import com.colintheshots.twain.handler.CodeEditHandler
+import com.colintheshots.twain.handler.HeadingEditHandler
+import com.colintheshots.twain.handler.LinkEditHandler
+import com.colintheshots.twain.handler.LinkEditHandler.OnClick
+import com.colintheshots.twain.handler.StrikethroughEditHandler
 import io.noties.markwon.Markwon
 import io.noties.markwon.SoftBreakAddsNewLinePlugin
 import io.noties.markwon.editor.MarkwonEditor
@@ -76,7 +76,7 @@ import java.lang.reflect.Field
 import java.util.concurrent.Executors
 
 /**
- * A custom Markwon Editor view created by Meetup for editing Markdown text with syntax highlighting.
+ * A custom Markwon Editor view for editing Markdown text with syntax highlighting.
  *
  * @param value TextFieldValue including text, selection, and cursor position
  * @param onValueChange callback to set a TextFieldValue in Compose

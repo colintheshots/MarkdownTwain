@@ -1,4 +1,4 @@
-package com.meetup.twain
+package com.colintheshots.twain
 
 import android.content.Context
 import android.util.TypedValue

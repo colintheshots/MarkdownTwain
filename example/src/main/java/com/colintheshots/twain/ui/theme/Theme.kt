@@ -1,4 +1,4 @@
-package com.meetup.twain.ui.theme
+package com.colintheshots.twain.ui.theme
 
 import android.app.Activity
 import android.os.Build

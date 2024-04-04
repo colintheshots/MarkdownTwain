@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.meetup.twain"
+    namespace = "com.colintheshots.twain"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.meetup.twain.example"
+        applicationId = "com.colintheshots.twain.example"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

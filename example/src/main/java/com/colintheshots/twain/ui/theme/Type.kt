@@ -1,4 +1,4 @@
-package com.meetup.twain.ui.theme
+package com.colintheshots.twain.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

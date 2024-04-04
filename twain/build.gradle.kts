@@ -14,7 +14,7 @@ plugins {
 }
 
 android {
-    namespace = "com.meetup.twain"
+    namespace = "com.colintheshots.twain"
     compileSdk = 33
 
     defaultConfig {
@@ -84,14 +84,6 @@ fun Project.getLocalProperty(key: String, file: String = "local.properties"): An
     } else ""
 
     return properties.getProperty(key) ?: ""
-}
-
-fun Project.getRepositoryUsername(): String {
-    return this.getLocalProperty("nexus_username").toString() ?: ""
-}
-
-fun Project.getRepositoryPassword(): String {
-    return this.getLocalProperty("nexus_password").toString() ?: ""
 }
 
 val repoUserName = project.getLocalProperty("nexus_username").toString()

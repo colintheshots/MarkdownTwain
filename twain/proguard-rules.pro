@@ -20,6 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep public class com.meetup.twain.** { public *; }
+-keep public class com.colintheshots.twain.** { public *; }
 -dontobfuscate
 -dontwarn java.lang.invoke.StringConcatFactory

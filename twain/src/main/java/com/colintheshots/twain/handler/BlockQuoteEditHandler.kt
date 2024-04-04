@@ -1,4 +1,4 @@
-package com.meetup.twain.handler
+package com.colintheshots.twain.handler
 
 import android.text.Editable
 import android.text.Spanned
