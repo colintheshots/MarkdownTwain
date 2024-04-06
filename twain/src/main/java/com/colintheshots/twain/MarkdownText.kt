@@ -81,7 +81,7 @@ private fun createTextView(
     color: Color = Color.Unspecified,
     defaultColor: Color,
     fontSize: TextUnit = TextUnit.Unspecified,
-    textAlign: TextAlign? = null,
+    textAlign: TextAlign = TextAlign.Start,
     maxLines: Int = Int.MAX_VALUE,
     @FontRes fontResource: Int? = null,
     style: TextStyle,
