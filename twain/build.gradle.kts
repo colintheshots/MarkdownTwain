@@ -1,6 +1,7 @@
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import com.vanniktech.maven.publish.SonatypeHost
 import java.io.FileInputStream
 import java.io.InputStreamReader
-import java.net.URI
 import java.util.Properties
 
 @Suppress(
@@ -9,13 +10,13 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("maven-publish")
+    id("com.vanniktech.maven.publish") version "0.28.0"
     id("signing")
 }
 
 android {
     namespace = "com.colintheshots.twain"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         aarMetadata {
@@ -30,7 +31,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -46,106 +50,62 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
 }
 
-val version = project.properties["VERSION_NAME"].toString()
-val group = project.properties["GROUP"].toString()
-
-fun isReleaseBuild(): Boolean {
-    return !project.properties["VERSION_NAME"].toString().contains("SNAPSHOT")
-}
-
-fun getReleaseRepositoryUrl(): URI {
-    val url =
-        if (project.hasProperty("RELEASE_REPOSITORY_URL")) project.properties["RELEASE_REPOSITORY_URL"].toString()
-        else "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-    return URI(url)
-}
-
-fun getSnapshotRepositoryUrl(): URI {
-    val url =
-        if (project.hasProperty("SNAPSHOT_REPOSITORY_URL")) project.properties["SNAPSHOT_REPOSITORY_URL"].toString()
-        else "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-    return URI(url)
-}
-
-fun Project.getLocalProperty(key: String, file: String = "local.properties"): Any {
+fun getLocalProperty(key: String, file: String = "local.properties"): Any {
     val properties = Properties()
     val localProperties = File(file)
     if (localProperties.isFile) {
         InputStreamReader(FileInputStream(localProperties), Charsets.UTF_8).use { reader ->
             properties.load(reader)
         }
-    } else ""
+    }
 
     return properties.getProperty(key) ?: ""
 }
 
-val repoUserName = project.getLocalProperty("nexus_username").toString()
-val repoPassword = project.getLocalProperty("nexus_password").toString()
-publishing {
-    repositories {
-        maven {
-            val releasesRepoUrl =
-                project.properties["RELEASE_REPOSITORY_URL"]?.let { URI(it.toString()) }
-                    ?: error("Release repository not defined")
-            val snapshotsRepoUrl =
-                project.properties["SNAPSHOT_REPOSITORY_URL"]?.let { URI(it.toString()) }
-                    ?: error("Snapshot repository not defined")
-            url = (if (isReleaseBuild()) releasesRepoUrl else snapshotsRepoUrl)
+val repoUserName = getLocalProperty("nexus_username").toString()
+val repoPassword = getLocalProperty("nexus_password").toString()
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
+    signAllPublications()
 
-            credentials {
-                username = repoUserName
-                password = repoPassword
+    coordinates(
+        "com.colintheshots",
+        "twain",
+        "0.2.3"
+    )
+
+    pom {
+        name = "Markdown Twain"
+        description = "A Markdown editor for Jetpack Compose"
+        url = "https://github.com/colintheshots/MarkdownTwain"
+        inceptionYear = "2022"
+        licenses {
+            license {
+                name = "The Apache Software License, Version 2.0"
+                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "repo"
             }
         }
-    }
-    publications {
-        register<MavenPublication>("twain") {
-            pom {
-                name.set(project.properties["POM_NAME"].toString())
-                description.set(project.properties["POM_DESCRIPTION"].toString())
-                url.set(project.properties["POM_URL"].toString())
-                groupId = project.properties["GROUP_ID"].toString()
-                artifactId = project.properties["ARTIFACT_ID"].toString()
-                version = project.properties["VERSION_NAME"].toString()
-
-                licenses {
-                    license {
-                        name.set(project.properties["POM_LICENCE_NAME"].toString())
-                        url.set(project.properties["POM_LICENCE_URL"].toString())
-                        distribution.set(project.properties["POM_LICENCE_DIST"].toString())
-                    }
-                }
-
-                developers {
-                    developer {
-                        id.set(project.properties["POM_DEVELOPER_ID"].toString())
-                        name.set(project.properties["POM_DEVELOPER_NAME"].toString())
-                        email.set(project.properties["POM_DEVELOPER_EMAIL"].toString())
-                    }
-                }
-
-                scm {
-                    connection.set(project.properties["POM_SCM_CONNECTION"].toString())
-                    developerConnection.set(project.properties["POM_SCM_DEV_CONNECTION"].toString())
-                    url.set(project.properties["POM_SCM_URL"].toString())
-                }
-            }
-            afterEvaluate {
-                from(components["release"])
+        developers {
+            developer {
+                id = "colintheshots"
+                name = "Colin Lee"
+                email = "colin@colintheshots.com"
             }
         }
+        scm {
+            connection = "scm:git@github.com:colintheshots/MarkdownTwain.git"
+            developerConnection = "scm:git@github.com:colintheshots/MarkdownTwain.git"
+            url = "https://github.com/colintheshots/MarkdownTwain"
+        }
     }
+    configure(AndroidSingleVariantLibrary("release", sourcesJar = true, publishJavadocJar = true))
 }
 
 signing {
-    sign(publishing.publications["twain"])
+    sign(publishing.publications)
 }
 
 dependencies {

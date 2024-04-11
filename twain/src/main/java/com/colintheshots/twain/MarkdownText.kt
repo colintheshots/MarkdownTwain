@@ -44,7 +44,7 @@ fun MarkdownText(
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
     fontSize: TextUnit = TextUnit.Unspecified,
-    textAlign: TextAlign? = null,
+    textAlign: TextAlign = TextAlign.Start,
     maxLines: Int = Int.MAX_VALUE,
     @FontRes fontResource: Int? = null,
     style: TextStyle = LocalTextStyle.current,
@@ -104,13 +104,11 @@ private fun createTextView(
         setTextSize(TypedValue.COMPLEX_UNIT_DIP, mergedStyle.fontSize.value)
 
         viewId?.let { id = viewId }
-        textAlign?.let { align ->
-            textAlignment = when (align) {
-                TextAlign.Left, TextAlign.Start -> View.TEXT_ALIGNMENT_TEXT_START
-                TextAlign.Right, TextAlign.End -> View.TEXT_ALIGNMENT_TEXT_END
-                TextAlign.Center -> View.TEXT_ALIGNMENT_CENTER
-                else -> View.TEXT_ALIGNMENT_TEXT_START
-            }
+        textAlignment = when (textAlign) {
+            TextAlign.Left, TextAlign.Start -> View.TEXT_ALIGNMENT_TEXT_START
+            TextAlign.Right, TextAlign.End -> View.TEXT_ALIGNMENT_TEXT_END
+            TextAlign.Center -> View.TEXT_ALIGNMENT_CENTER
+            else -> View.TEXT_ALIGNMENT_TEXT_START
         }
 
         fontResource?.let { font ->

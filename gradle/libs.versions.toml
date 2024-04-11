@@ -38,19 +38,19 @@ androidx-test-runner = { module = "androidx.test:runner", version.ref = "test" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coil" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
-compose-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material-core = { module = "androidx.compose.material:material", version.ref = "compose" }
 compose-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "compose" }
-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 compose-material3-core = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 compose-material3-window-size = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "compose-material3" }
 compose-paging = { module = "androidx.paging:paging-compose", version.ref = "compose-paging" }
-compose-ui-core = { module = "androidx.compose.ui:ui" }
+compose-ui-core = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-ui-test-core = { module = "androidx.compose.ui:ui-test" }
-compose-ui-test-junit = { module = "androidx.compose.ui:ui-test-junit4" }
-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
-compose-ui-util = { module = "androidx.compose.ui:ui-util" }
+compose-ui-test-core = { module = "androidx.compose.ui:ui-test", version.ref = "compose" }
+compose-ui-test-junit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
+compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
+compose-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose" }
 detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 junit = { module = "junit:junit", version.ref = "junit-junit" }
 junit-core = { module = "androidx.test.ext:junit", version.ref = "junit" }
