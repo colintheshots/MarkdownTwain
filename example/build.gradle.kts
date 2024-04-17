@@ -1,6 +1,3 @@
-@Suppress(
-    "DSL_SCOPE_VIOLATION"
-) // ignore warnings here, it's an Android Studio bug: https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -26,10 +23,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "1.8"
     buildFeatures.compose = true
     composeOptions.kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     packagingOptions.resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -37,6 +34,7 @@ android {
 
 dependencies {
     implementation(project(":twain"))
+//    implementation(libs.twain) uncomment to use the published version
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

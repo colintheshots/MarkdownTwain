@@ -11,6 +11,7 @@ import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,6 +40,7 @@ import io.noties.markwon.Markwon
  * @param textTruncated callback for determining if the text is truncated
  */
 @Composable
+@NonRestartableComposable
 fun MarkdownText(
     markdown: String,
     modifier: Modifier = Modifier,

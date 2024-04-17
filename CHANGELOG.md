@@ -1,7 +1,8 @@
-## [0.2.3]
+## [0.3.1]
 ### Notes
 * Migrated from meetup.com to colintheshots.com for artifacts
 * Example should now work without setting project properties
+* Remove TextFieldValue to simplify plugin code so it works out of the box
 
 ## [0.2.2]
 ### Added

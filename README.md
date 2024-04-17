@@ -4,7 +4,7 @@ MarkdownTwain is an open source Android software library that provides an easy-t
 
 With MarkdownTwain, developers can easily add a Markdown editor and viewer to their Android applications, allowing users to easily format and style their text with Markdown syntax.
 
-Note: MarkdownTwain was created by Colin Lee while working at Meetup.com. The package was migrated to colintheshots.com with the change in Meetup ownership. Maven package information has changed. Use the new com.colintheshots name to get the latest updates.
+Note: MarkdownTwain was created by Colin Lee while working at Meetup.com. The package was migrated to colintheshots.com along with the change in Meetup ownership. Maven package information has changed. Use the new com.colintheshots name to get the latest updates. Also, I also fixed issues preventing using older artifacts on Maven Central.
 
 ## Features
 
@@ -29,7 +29,7 @@ To use MarkdownTwain in your Android project, follow these steps:
 
 ```kotlin
 dependencies {
-    implementation("com.colintheshots:twain:0.2.3")
+    implementation("com.colintheshots:twain:0.3.1")
 }
 ```
 </details>
@@ -38,7 +38,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'com.colintheshots:twain:0.2.3'
+    implementation 'com.colintheshots:twain:0.3.1'
 }
 ```
 
@@ -56,7 +56,9 @@ dependencies {
     Card {
         MarkdownEditor(
             value = textFieldValue.value,
-            onValueChange = { value -> textFieldValue.value = value.copy(text = value.text) },
+            onValueChange = { value ->
+                textFieldValue.value = textFieldValue.value.copy(text = value)
+            },
             modifier = Modifier.fillMaxWidth()
         )
     }

@@ -11,7 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
 import androidx.compose.material.Text
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -41,9 +41,9 @@ class MainActivity : ComponentActivity() {
                     Card(border = BorderStroke(1.dp, Color.Black)) {
                         Box {
                             MarkdownEditor(
-                                value = textFieldValue.value,
+                                value = textFieldValue.value.text,
                                 onValueChange = { value ->
-                                    textFieldValue.value = value.copy(text = value.text)
+                                    textFieldValue.value = textFieldValue.value.copy(text = value)
                                 },
                                 charLimit = CHAR_LIMIT,
                                 maxLines = 8,
@@ -55,9 +55,9 @@ class MainActivity : ComponentActivity() {
                             )
                             Text(
                                 text = counterValue.toString(),
-                                style = if (counterValue < 1) MaterialTheme.typography.bodySmall.copy(
+                                style = if (counterValue < 1) MaterialTheme.typography.body1.copy(
                                     color = Color.Red
-                                ) else MaterialTheme.typography.bodySmall,
+                                ) else MaterialTheme.typography.body1,
                                 modifier = Modifier
                                     .align(Alignment.BottomEnd)
                                     .padding(end = 8.dp, bottom = 2.dp)
@@ -67,8 +67,8 @@ class MainActivity : ComponentActivity() {
 
                     Text(
                         stringResource(R.string.preview_markdown_heading),
-                        style = MaterialTheme.typography.headlineMedium.copy(
-                            color = MaterialTheme.colorScheme.secondary
+                        style = MaterialTheme.typography.h3.copy(
+                            color = MaterialTheme.colors.secondary
                         ),
                         modifier = Modifier.padding(top = 16.dp)
                     )

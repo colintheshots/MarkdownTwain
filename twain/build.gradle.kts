@@ -4,13 +4,10 @@ import java.io.FileInputStream
 import java.io.InputStreamReader
 import java.util.Properties
 
-@Suppress(
-    "DSL_SCOPE_VIOLATION"
-) // ignore warnings here, it's an Android Studio bug: https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("com.vanniktech.maven.publish") version "0.28.0"
+    alias(libs.plugins.maven.publish)
     id("signing")
 }
 
@@ -38,18 +35,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
+    kotlinOptions.jvmTarget = "1.8"
+    buildFeatures.compose = true
+    composeOptions.kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
 }
 
 fun getLocalProperty(key: String, file: String = "local.properties"): Any {
@@ -73,7 +64,7 @@ mavenPublishing {
     coordinates(
         "com.colintheshots",
         "twain",
-        "0.2.3"
+        "0.3.1"
     )
 
     pom {
