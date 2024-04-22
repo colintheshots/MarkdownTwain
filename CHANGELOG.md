@@ -1,3 +1,6 @@
+## [0.3.2]
+* Fixed Maven central library artifact
+
 ## [0.3.1]
 ### Notes
 * Migrated from meetup.com to colintheshots.com for artifacts

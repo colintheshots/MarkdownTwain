@@ -33,8 +33,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":twain"))
-//    implementation(libs.twain) uncomment to use the published version
+    implementation(libs.twain)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

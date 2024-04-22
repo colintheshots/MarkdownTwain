@@ -1,8 +1,5 @@
 import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import com.vanniktech.maven.publish.SonatypeHost
-import java.io.FileInputStream
-import java.io.InputStreamReader
-import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.library)
@@ -27,7 +24,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -43,20 +40,6 @@ android {
     composeOptions.kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
 }
 
-fun getLocalProperty(key: String, file: String = "local.properties"): Any {
-    val properties = Properties()
-    val localProperties = File(file)
-    if (localProperties.isFile) {
-        InputStreamReader(FileInputStream(localProperties), Charsets.UTF_8).use { reader ->
-            properties.load(reader)
-        }
-    }
-
-    return properties.getProperty(key) ?: ""
-}
-
-val repoUserName = getLocalProperty("nexus_username").toString()
-val repoPassword = getLocalProperty("nexus_password").toString()
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
     signAllPublications()
@@ -64,7 +47,7 @@ mavenPublishing {
     coordinates(
         "com.colintheshots",
         "twain",
-        "0.3.1"
+        libs.versions.twain.get()
     )
 
     pom {

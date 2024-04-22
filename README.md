@@ -29,7 +29,7 @@ To use MarkdownTwain in your Android project, follow these steps:
 
 ```kotlin
 dependencies {
-    implementation("com.colintheshots:twain:0.3.1")
+    implementation("com.colintheshots:twain:0.3.2")
 }
 ```
 </details>
@@ -38,7 +38,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'com.colintheshots:twain:0.3.1'
+    implementation 'com.colintheshots:twain:0.3.2'
 }
 ```
 

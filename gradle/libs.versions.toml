@@ -21,7 +21,7 @@ lifecycle = "2.7.0"
 markwon = "4.6.2"
 maven-publish = "0.28.0"
 test = "1.5.2"
-twain = "0.3.1"
+twain = "0.3.2"
 
 [libraries]
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
